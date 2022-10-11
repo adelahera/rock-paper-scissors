@@ -3,12 +3,12 @@ function playOneRound (playerSelection, computerSelection) {
     playerSelection = prompt("Choose rock, paper or scissors");
     console.log("Player's choice: " + playerSelection);
 
-    computerSelection = Math.ceil(Math.random() * 3);
+    computerSelection = Math.floor(Math.random() * 3);
 
-    if(computerSelection < 1){
+    if(computerSelection === 0){
         computerSelection = "rock";
     }
-    else if (1 <= computerSelection <= 2){
+    else if (computerSelection === 1){
         computerSelection = "paper";
     }
     else {
