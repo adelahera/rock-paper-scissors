@@ -1,19 +1,20 @@
-var playerSelection = prompt("Choose rock, paper or scissors");
-
-var computerSelection = Math.ceil(Math.random() * 3);
-
-if(computerSelection < 1){
-
-    computerSelection = "rock";
-}
-else if (1 <= computerSelection <= 2){
-    computerSelection = "paper";
-}
-else {
-    computerSelection = "scissors"
-}
-
 function playOneRound (playerSelection, computerSelection) {
+
+    playerSelection = prompt("Choose rock, paper or scissors");
+    console.log("Player's choice: " + playerSelection);
+
+    computerSelection = Math.ceil(Math.random() * 3);
+
+    if(computerSelection < 1){
+        computerSelection = "rock";
+    }
+    else if (1 <= computerSelection <= 2){
+        computerSelection = "paper";
+    }
+    else {
+        computerSelection = "scissors"
+    }    
+    console.log("Computer's choice: " + computerSelection);
 
     if(playerSelection === computerSelection){
 
@@ -29,8 +30,8 @@ function playOneRound (playerSelection, computerSelection) {
         }
     }
 
-    if (playerChoice === "paper") {
-        if (computerChoice === "scissors") {
+    if (playerSelection === "paper") {
+        if (computerSelection === "scissors") {
             return 2;
         }
         else {
@@ -38,8 +39,8 @@ function playOneRound (playerSelection, computerSelection) {
         }
     }
 
-    if (playerChoice === "scissors") {
-        if (computerChoice === "rock") {
+    if (playerSelection === "scissors") {
+        if (computerSelection === "rock") {
             return 2;
         }
         else {
@@ -53,6 +54,8 @@ function game() {
     let winner = false;
     let playerWins = 0;
     let computerWins = 0;
+    let playerSelection;
+    let computerSelection;
 
     while(!winner) {
 
@@ -62,20 +65,24 @@ function game() {
         }
         else if (aux === 0){
             console.log("Player wins the round!");
+            playerWins++;
+            console.log("Result: " + playerWins + " - " + computerWins);
         }
-        else {
+        else if(aux === 2){
             console.log("Computer wins the round!");
+            computerWins++;
+            console.log("Result: " + playerWins + " - " + computerWins);
         }
 
         if(playerWins === 3) {
-            console.log("CONGRATULATIONS! YOU HAVE WON THE GAME!");
+            alert("CONGRATULATIONS! YOU HAVE WON THE GAME!");
             winner = true;
         }
         else if(computerWins === 3) {
-            console.log("You lost, computer won the game");
+            alert("You lost, computer won the game");
             winner = true;
         }
     }
 }
 
-console.log(game());
+game();
