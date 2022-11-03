@@ -1,8 +1,21 @@
-function playOneRound (playerSelection, computerSelection) {
+let myScore = 0;
+let compScore = 0;
+let computerSelection;
+const _r = document.getElementById("rock");
+const _p = document.getElementById("paper"); 
+const _s = document.getElementById("scissors");
 
-    playerSelection = prompt("Choose rock, paper or scissors");
-    console.log("Player's choice: " + playerSelection);
+_r.addEventListener("click", () => {
+    playRound("rock",computerSelection)});
 
+_p.addEventListener("click", () => {
+    playRound("paper",computerSelection)});
+
+_s.addEventListener("click", () => {
+    playRound("scissors",computerSelection)});
+
+function playRound (playerSelection, computerSelection) {
+   
     let x = Math.floor(Math.random() * 3);
 
     if(x == 0){
@@ -13,76 +26,61 @@ function playOneRound (playerSelection, computerSelection) {
     }
     else if(x == 2){
         computerSelection = "scissors"
-    }    
-    console.log("Computer's choice: " + computerSelection);
+    }
 
     if(playerSelection === computerSelection){
 
-        return 1;
+        document.getElementById("results").innerHTML = "Draw! You made the same choice -- Current score: " + myScore + " - " + compScore;
     }
-
-    if(playerSelection === "rock") {
+    else if(playerSelection === "rock") {
         if(computerSelection === "scissors") {
-            return 0;
+            myScore++;
+            document.getElementById("results").innerHTML = "You win the round! -- Current score: " + myScore + " - " + compScore;
+            
         }
         else {
-            return 2;
+            compScore++;
+            document.getElementById("results").innerHTML = "Computer wins the round! -- Current score: " + myScore + " - " + compScore;
+            
         }
     }
-
-    if (playerSelection === "paper") {
+    else if (playerSelection === "paper") {
         if (computerSelection === "scissors") {
-            return 2;
+            compScore++;
+            document.getElementById("results").innerHTML = "Computer wins the round! -- Current score: " + myScore + " - " + compScore;
+            
         }
         else {
-            return 0;
+            myScore++;
+            document.getElementById("results").innerHTML = "You win the round! -- Current score: " + myScore + " - " + compScore;
+            
         }
     }
-
-    if (playerSelection === "scissors") {
+    else if (playerSelection === "scissors") {
         if (computerSelection === "rock") {
-            return 2;
+            compScore++;
+            document.getElementById("results").innerHTML = "Computer wins the round! -- Current score: " + myScore + " - " + compScore;
+            
         }
         else {
-            return 0;
+            myScore++;
+            document.getElementById("results").innerHTML = "You win the round! -- Current score: " + myScore + " - " + compScore;
+           
         }
+    }
+
+    document.getElementById("mychoices").innerHTML = "Player's choice: " + playerSelection;    
+    document.getElementById("compchoices").innerHTML = "Computer's choice: " + computerSelection;
+
+    if(myScore == 5) {
+        myScore = 0;
+        compScore = 0;
+        document.getElementById("results").innerHTML = "You have reached 5 points! End of the game! Click again to restart"
+    }
+    else if(compScore == 5) {
+        myScore = 0;
+        compScore = 0;
+        document.getElementById("results").innerHTML = "Computer has reached 5 points! End of the game! Click again to restart"
     }
 }
 
-function game() {
-
-    let winner = false;
-    let playerWins = 0;
-    let computerWins = 0;
-    let playerSelection;
-    let computerSelection;
-
-    while(!winner) {
-
-        let aux = playOneRound(playerSelection, computerSelection);
-        if(aux === 1) {
-            console.log("That's a tie! Next round!");
-        }
-        else if (aux === 0){
-            console.log("Player wins the round!");
-            playerWins++;
-            console.log("Result: " + playerWins + " - " + computerWins);
-        }
-        else if(aux === 2){
-            console.log("Computer wins the round!");
-            computerWins++;
-            console.log("Result: " + playerWins + " - " + computerWins);
-        }
-
-        if(playerWins === 3) {
-            alert("CONGRATULATIONS! YOU HAVE WON THE GAME!");
-            winner = true;
-        }
-        else if(computerWins === 3) {
-            alert("You lost, computer won the game");
-            winner = true;
-        }
-    }
-}
-
-game();
